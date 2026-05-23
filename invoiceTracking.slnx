@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="InvoiceTracking.Api/InvoiceTracking.Api.csproj" />
+  <Project Path="InvoiceTracking.Core/InvoiceTracking.Core.csproj" />
+  <Project Path="InvoiceTracking.Infrastructure/InvoiceTracking.Infrastructure.csproj" />
+  <Project Path="InvoiceTracking.Web/InvoiceTracking.Web.csproj" />
+</Solution>
