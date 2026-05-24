@@ -1,10 +1,49 @@
 ﻿@page
-@model IndexModel
+@model InvoiceTracking.Web.Pages.IndexModel
+@using InvoiceTracking.Core.Entities
+
 @{
-    ViewData["Title"] = "Home page";
+  ViewData["Title"] = "Invoices & Payment Tickets";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Invoices and Payment Tickets</h1>
+
+<a asp-page="/Upload" class="btn btn-success mb-3">+ Upload new invoice</a>
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Invoice #</th>
+    <th>Vendor</th>
+    <th>Amount</th>
+    <th>Invoice Date</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  @foreach(Invoice invoice in Model.Invoices){
+    PaymentStatus status = invoice.PaymentTicket?.Status ?? PaymentStatus.Unpaid;
+    string? badgeClass = status switch{
+      PaymentStatus.Paid => "bg-success",
+      PaymentStatus.PartiallyPaid => "bg-warning",
+      PaymentStatus.Overdue => "bg-danger",
+      _ => "bg-secondary"
+    };
+    <tr>
+      <td>@invoice.InvoiceNumber</td>
+      <td>@invoice.VendorName</td>
+      <td>@invoice.TotalAmount.ToString("C")</td>
+      <td>@invoice.InvoiceDate.ToShortDateString()</td>
+      <td>
+        <span class="badge @badgeClass">
+          @invoice.PaymentTicket?.Status
+        </span>
+      </td>
+      <td>
+        <a asp-page="Ticket" asp-route-id="@invoice.Id" class="btn-btn-sm bt-primary">Manage ticket</a>
+      </td>
+    </tr>
+  }
+</tbody>
+</table>
