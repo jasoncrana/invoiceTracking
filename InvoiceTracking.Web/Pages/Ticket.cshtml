@@ -1,0 +1,63 @@
+@page "{id:guid}"
+@model InvoiceTracking.Web.Pages.TicketModel
+@using InvoiceTracking.Core.Entities
+
+@{
+  ViewData["Title"] = "Payment ticket";
+}
+
+<h1>Payment Ticket</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Invoice Details</h3>
+    <dl class="row">
+      <dt class="col-sm-4">Invoice #</dt>
+      <dd class="col-sm-8">@Model.Invoice?.InvoiceNumber</dd>
+      <dt class="col-sm-4">Vendor</dt>
+      <dd class="col-sm-8">@Model.Invoice?.VendorName</dd>
+      <dt class="col-sm-4">Total amount</dt>
+      <dd class="col-sm-8">@Model.Invoice?.TotalAmount.ToString("C")</dd>
+      <dt class="col-sm-4">Invoice date</dt>
+      <dd class="col-sm-8">@Model.Invoice?.InvoiceDate.ToShortDateString()</dd>
+    </dl>
+
+    @if (!string.IsNullOrEmpty(Model.Invoice?.FilePath)){
+      <a href="@Model.Invoice.FilePath" target="_blank" class="btn btn-outline-primary">View invoice</a>
+    }
+  </div>
+
+  <div class="col-md-6">
+    <h3>Update Payment Status</h3>
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Payment status</label>
+        <select name="Status" class="form-select" asp-items="Html.GetEnumSelectList<PaymentStatus>()"></select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Amount paid</label>
+        <input type="number" step="0.01" name="AmountPaid" class="form-control" value="@Model.Ticket?.AmountPaid" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Payment date</label>
+        <input type="date" name="PaymentDate" class="form-control" value="@Model.Ticket?.PaymentDate?.ToString("yyyy-MM-dd")" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Payment method</label>
+        <input type="text" name="PaymentMethod" class="form-control" value="@Model.Ticket?.PaymentMethod" placeholder="Bank transfer, Check, Credit card, etc." />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Reference / check #</label>
+        <input type="text" name="ReferenceNumber" class="form-control" value="@Model.Ticket?.ReferenceNumber" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Notes</label>
+        <textarea name="Notes" class="form-control" rows="4">@Model.Ticket?.Notes</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save payment update</button>
+      <a asp-page="/Index" class="btn btn-secondary">Back to list</a>
+    </form>
+  </div>
+
+</div>
