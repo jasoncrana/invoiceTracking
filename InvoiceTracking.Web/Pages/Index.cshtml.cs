@@ -1,10 +1,12 @@
 using InvoiceTracking.Core.Entities;
 using InvoiceTracking.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceTracking.Web.Pages;
 
+[Authorize]
 public class IndexModel : PageModel
 {
   private readonly ApplicationDbContext _context;

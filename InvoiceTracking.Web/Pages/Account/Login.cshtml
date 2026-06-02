@@ -1,0 +1,27 @@
+@page
+@model InvoiceTracking.Web.Pages.Account.LoginModel
+
+@{
+  ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h2 class="text-center">Login</h2>
+
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="Email" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="Password" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <div class="text-center mt-3">
+      <a asp-page="/Account/Register">Need an account? Register</a>
+    </div>
+  </div>
+</div>

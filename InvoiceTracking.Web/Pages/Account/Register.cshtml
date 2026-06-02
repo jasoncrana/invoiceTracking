@@ -1,0 +1,32 @@
+@page
+@model InvoiceTracking.Web.Pages.Account.RegisterModel
+
+@{
+  ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h2 class="text-center">Create Account</h2>
+
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Full name</label>
+        <input type="text" name="FullName" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" name="Email" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="Password" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a asp-page="/Account/Login">Already have an account? Login</a>
+    </div>
+  </div>
+</div>

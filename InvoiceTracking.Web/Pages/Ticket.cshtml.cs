@@ -1,11 +1,13 @@
 using InvoiceTracking.Core.Entities;
 using InvoiceTracking.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceTracking.Web.Pages;
 
+[Authorize]
 public class TicketModel : PageModel
 {
   private readonly ApplicationDbContext _context;

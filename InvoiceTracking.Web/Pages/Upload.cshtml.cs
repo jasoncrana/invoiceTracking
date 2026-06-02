@@ -1,11 +1,13 @@
 using InvoiceTracking.Core.Entities;
 using InvoiceTracking.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace InvoiceTracking.Web.Pages;
 
+[Authorize]
 public class UploadModel : PageModel{
   private readonly ApplicationDbContext _context;
   private readonly IWebHostEnvironment _environment;
